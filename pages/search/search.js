@@ -149,8 +149,17 @@ Page({
         } else {
           that.data.articleItem.isShowArticle = true;
         }
-        console.log(res.data.List)
-        that.data.articleItem.List.push(...res.data.List);
+       console.log(res.data.List)
+        var arr = Object.keys(res.data.List).length;
+        var itemleng = Object.keys(that.data.articleItem.List).length;
+        
+        for(var i = 1; i<=arr;i++){
+        that.data.articleItem.List[itemleng + i] = res.data.List[i]
+        }
+        
+        //that.data.articleItem.List.push(res.data.List[1]);
+        //console.log(that.data.articleItem.List)
+        //that.data.articleItem.List.push(...res.data.List);
         that.setData({
           articleItem: that.data.articleItem
         })
