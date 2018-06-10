@@ -1,0 +1,19 @@
+<!--<view class="detail">
+    <view class="title">{{article.title}}</view>
+    <view class="info">
+        <text class="WText14PT mr10">云盘地址：{{article}}</text>
+        <text class="WText14PT">{{article.PublishDate}}</text>
+    </view>
+    <view class="content">{{article.content}}</view>
+</view>-->
+
+<view class='deatils'>
+  <view class="titles" style='margin:10px 0px;font-size:15px;margin-left:40%;color:#c1c0c0'>~使用说明~</view>
+  <textarea style='width:80%;margin:0 auto;word-break: break-all;background-color:white;border-radius: 5px;color:#c1c0c0;font-size:15px;padding:15px 15px;height:65px' disabled="disabled">微信小程序不允许直接打开页面,  请点击"查看内容"按钮复制信息,  打开浏览器在地址栏中粘贴访问内容</textarea>
+</view>
+
+<view class='deatil'>
+  <view class="title">链接内容</view>
+    <textarea style='width:80%;margin:0 auto;word-break: break-all;background-color:white;border-radius: 5px;color:green;font-size:15px;padding:15px 15px;height:65px' disabled="disabled">{{article}}</textarea>
+    <button bindtap='show' id="{{article}}" class='btn' style='background:#337ab7;color:white'>查看内容</button>
+</view>

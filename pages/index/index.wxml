@@ -1,0 +1,49 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="header" style='background-image:url(https://htcc.fendous.cn/banners.jpg);background-repeat:no-repeat; background-size:100% 100%;-moz-background-size:100% 100%;'>
+    <view class="brand">
+      <image src="../../icons/search.png" class="brand-img" mode="scaleToFill"/>
+      <text class="brand-text">糯米云搜</text>
+    </view>
+    <view class="search-area">
+    <!--bindfocus="focusHandler"-->
+      <input placeholder="输入信息关键字" class="search-words" id="search_words" bindinput ="userNameInput" />
+      <button type="default" bindtap="excuteSearch" class="search-btn" hover-class="search-btn-hover" style='background:#337ab7;color:white'>搜索</button>
+    </view>
+    <view class="brand">
+      <text style='color:white;font-size:13px;'>信息查询,就是这么的简单</text>
+    </view>
+  </view>
+  <scroll-view scroll-y="true" style="height: 467px;" scroll-top="0">
+
+    <view class="white-box hot">
+      <view class="title">
+        <text class="WText14PT middle-line">热门搜索</text>
+      </view>
+      <view class="hot-words">
+        <block wx:for="{{hotList}}" wx:for-item="hotItem" wx:for-index="i" wx:key="{{hotItem.id}}">
+          <button  style='background:#337ab7;color:white' size="mini" type="default" bindtap="excuteHotSearch" class="hot-word" data-sub="{{i}}">{{hotItem.content}}</button>
+        </block>
+      </view>
+    </view>
+<!--
+    <view class="white-box recommend">
+      <view class="title">
+        <text class="WText14PT middle-line">新鲜干货</text>
+      </view>
+      <view class="articles">
+        <view class="text-center" wx:if="{{isFail}}">刷新页面试试</view>
+        <block wx:for="{{recommendList}}" wx:for-item="article" wx:for-index="i" wx:key="{{article.Id}}">
+          <view class="article" bindtap="getDetail" data-id="{{article.Id}}">
+            <image class="article-avatar" mode="scaleToFill" src="{{article.avatar}}" />
+            <view class="article-info">
+               <text class="WText16PT article-title">{{article.title}}</text>
+               <view class="line"></view>
+               <text class="WText14PT">作者: {{article.autor}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>-->
+  </scroll-view>
+</view>
