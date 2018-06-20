@@ -9,6 +9,10 @@ page {
 .title{
   font-size:1.2rem;
   font-weight: bolder;
+  overflow: hidden;
+  max-width: 210px;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
 }
 
 .info{

@@ -60,6 +60,10 @@ App({
   },
   globalData: {
     userInfo: null,
-    appHost: "https://htcc.fendous.cn/api/baidu"
+    appHost: "https://htcc.fendous.cn/api/",
+    jsonrpc:"2.0",
+    id:"1",
+    username : "zhaowei",
+    password:"zhaowei123"
   }
 })

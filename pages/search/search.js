@@ -13,7 +13,9 @@ Page({
     noSearchData: false,
     noSearchResult: false,
     isDisabled: true,
-    hiddenLoading: true
+    hiddenLoading: true,
+    isShowArticle : 0,
+    p:0,
   },
   onLoad: function (option) {
     var that = this;
@@ -69,12 +71,18 @@ Page({
 
 
       wx.request({
-        url: app.globalData.appHost + '/skydriveinterface',
-        data: { name: option.q },
-        method: 'GET',
+        url: app.globalData.appHost,
+        data: {
+          jsonrpc: app.globalData.jsonrpc,
+          "method": "Search.index",
+          params: { "username": app.globalData.username, "password": app.globalData.password, "key": option.q, "p": 0},
+          id: app.globalData.id,
+           },
+        method: 'POST',
         success: function (res) {
+          //console.log(res.data.result)
           //如果没有相关文章
-          if (res.data.total == 0) {
+          if (res.data.result.total == 0) {
             if (backNum != 0) {
 
             } else {
@@ -91,9 +99,11 @@ Page({
           }
           backNum++;
           //如果成功取到相关文章
-          res.data.isShowArticle = res.data.total > 3;
+          //console.log(res.data.result.total)
+          res.data.result.isShowArticle = res.data.result.total > 3;
           that.setData({
-            articleItem: res.data
+            articleItem: res.data.result,
+            p: res.data.result.nextpage
           });
 
         },
@@ -103,12 +113,14 @@ Page({
   },
 
   getDetail: function (e) {
+    //console.log(e.currentTarget.dataset.title)
     wx.navigateTo({
-      url: '../detail/detail?s='+encodeURIComponent(e.currentTarget.dataset.id)
+      url: '../detail/detail?s=' + encodeURIComponent(e.currentTarget.dataset.id) + '&k=' + e.currentTarget.dataset.title
     })
   },
   getMoreDisease: function (e) {
     var that = this
+    //console.log(that.data.searchWord)
     wx.request({
       url: app.globalData.appHost + '/ColleagueCircle/Search/GetDieaseList',
       data: { name: that.data.searchWord },
@@ -136,32 +148,42 @@ Page({
   },
   getMoreArticle: function (e) {
     var that = this
+    that.setData({
+      hiddenLoading: false
+    });
     wx.request({
-      url: app.globalData.appHost + '/skydriveinterface',
-      data: { name: that.data.searchWord },
-      method: 'GET',
+      url: app.globalData.appHost,
+      data: {
+        jsonrpc: app.globalData.jsonrpc,
+        "method": "Search.index",
+        params: { "username": app.globalData.username, "password": app.globalData.password, "key": that.data.searchWord, "p": that.data.p },
+        id: app.globalData.id,
+      },
+      method: 'POST',
       success: function (res) {
-        //如果成功取到相关疾病
-        var pageCount = Math.ceil(res.data.total / that.data.pageSize);
-        if (that.data.articlePageIndex == pageCount) {
+
+        var pageCount = Math.ceil(res.data.result.total / 15);
+        if (res.data.result.nextpage == 'end') {
           //就说明到最后一页
           that.data.articleItem.isShowArticle = false;
         } else {
           that.data.articleItem.isShowArticle = true;
         }
-       console.log(res.data.List)
-        var arr = Object.keys(res.data.List).length;
-        var itemleng = Object.keys(that.data.articleItem.List).length;
+    
+        var arr = Object.keys(res.data.result.list).length;
+        var itemleng = Object.keys(that.data.articleItem.list).length;
         
-        for(var i = 1; i<=arr;i++){
-        that.data.articleItem.List[itemleng + i] = res.data.List[i]
+        for(var i = 0; i<arr;i++){
+          that.data.articleItem.list[itemleng + i] = res.data.result.list[i]
         }
         
         //that.data.articleItem.List.push(res.data.List[1]);
         //console.log(that.data.articleItem.List)
         //that.data.articleItem.List.push(...res.data.List);
         that.setData({
-          articleItem: that.data.articleItem
+          articleItem: that.data.articleItem,
+          p: res.data.result.nextpage,
+          hiddenLoading: true
         })
       },
     })
@@ -241,13 +263,18 @@ Page({
     })
     **/
     wx.request({
-      url: app.globalData.appHost + '/skydriveinterface',
-      data: { name: that.data.searchWord },
-      method: 'GET',
+      url: app.globalData.appHost,
+      data: {
+        jsonrpc: app.globalData.jsonrpc,
+        "method": "Search.index",
+        params: { "username": app.globalData.username, "password": app.globalData.password, "key": that.data.searchWord, "p": 0 },
+        id: app.globalData.id,
+      },
+      method: 'POST',
       success: function (res) {
         //console.log(res);
         //如果没有相关文章
-        if (res.data.total == 0) {
+        if (res.data.result.total == 0) {
           if (backNum != 0) {
 
           } else {
@@ -265,9 +292,10 @@ Page({
         backNum++;
         //如果成功取到相关文章
         //console.log(res.data.total);
-        res.data.isShowArticle = res.data.total > 3;
+        res.data.result.isShowArticle = res.data.result.total > 3;
         that.setData({
-          articleItem: res.data
+          articleItem: res.data.result,
+          p: res.data.result.nextpage
         });
       },
     })
@@ -333,5 +361,12 @@ Page({
     this.setData({
       diseaseItem: this.data.diseaseItem
     })
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '网盘搜索',
+      desc: '网盘数据建搜。',
+      path: '/pages/index/index'
+    }
   }
 })

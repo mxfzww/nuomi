@@ -13,7 +13,6 @@
   <block wx:if="{{articleItem.total>0}}">
     <template is="accordion_article" data="{{...articleItem}}" />
   </block>
-  
   <block wx:if="{{diseaseItem.total>0}}">
     <template is="accordion_disease" data="{{...diseaseItem}}" />
   </block>

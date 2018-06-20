@@ -12,6 +12,7 @@ Page({
     var that = this
         that.setData({
           article: decodeURIComponent(option.s),
+          title: option.k,
         })
   },
   show(e) {
@@ -34,5 +35,13 @@ Page({
         //console.log(res.data)
       }
     })
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '网盘搜索',
+      desc: '网盘数据建搜。',
+      path: '/pages/index/index'
+    }
   }
+  
 })

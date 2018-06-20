@@ -18,14 +18,21 @@ Page({
     });
     
     wx.request({
-      url: "https://htcc.fendous.cn/api/firstpage/index",
-      data: { isFresh: "yes" },
-      method: 'GET',
+      url: "https://htcc.fendous.cn/api/",
+      data: {
+        jsonrpc: app.globalData.jsonrpc,
+        "method": "IndexKey.index",
+        params: { "username": app.globalData.username, "password": app.globalData.password},
+        id: app.globalData.id,
+      },
+      method: 'POST',
       success: function (res) {
+        //console.log(res)
         var arr = [];
-        for (var i = 0; i < res.data.length; i++) {
-          arr[i] = { 'content': res.data[i]};
+        for (var i = 0; i < res.data.result.length; i++) {
+          arr[i] = { 'content': res.data.result[i]};
         }
+        //console.log(arr)
           that.setData({
             hotList: arr
           })
@@ -34,7 +41,7 @@ Page({
          that.setData({
            isFail:true
          })
-         console.log(res.errMsg);
+         //console.log(res.errMsg);
       }
     });
    
