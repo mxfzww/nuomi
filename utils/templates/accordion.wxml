@@ -38,7 +38,7 @@
 
   <view class="warpper">
     <view class="summary">相关资源<text class="total">{{total}}</text>篇</view>
-    <button bindtap="onShareAppMessage" open-type="share" style='max-width:100%;height:1.3em;line-height:1.3em;background:rgba(220,229,239,0.9);font-size:13px;color:#8488b3;;position:fixed;top:10%;left:70%;'>分享给朋友</button>
+    <button bindtap="onShareAppMessage" open-type="share" style='max-width:100%;height:1.3em;line-height:1.3em;background:rgba(220,229,239,0.9);font-size:13px;color:#8488b3;;position:fixed;top:5.5em;left:70%;'>分享给朋友</button>
     <view class="inner">
       <block wx:for="{{list}}" wx:for-item="article" wx:for-index="i" wx:key="{{article.uid}}">
         <view class="article" bindtap="getDetail" data-id="{{article.link_url}}" data-title="{{article.title}}">

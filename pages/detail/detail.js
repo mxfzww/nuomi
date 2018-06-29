@@ -5,15 +5,28 @@ Page({
   data: {
     article: {},
     articles: {},
-    url: 'url'
+    url: 'url',
+    isset: ""
   },
   onLoad: function (option) {
 
     var that = this
-        that.setData({
-          article: decodeURIComponent(option.s),
-          title: option.k,
-        })
+    that.setData({
+      article: decodeURIComponent(option.s),
+      title: option.k,
+    })
+    setTimeout(function () {
+      wx.showToast({
+        title: '检测成功',
+        icon: 'success',
+        duration: 2000
+      }) 
+      that.setData({
+        isset: "检测链接可用"
+      })
+    }, 2000) 
+    
+    
   },
   show(e) {
     let that = this
