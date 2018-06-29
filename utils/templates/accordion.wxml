@@ -41,7 +41,7 @@
     <button bindtap="onShareAppMessage" open-type="share" style='max-width:100%;height:1.3em;line-height:1.3em;background:rgba(220,229,239,0.9);font-size:13px;color:#8488b3;;position:fixed;top:5.5em;left:70%;'>分享给朋友</button>
     <view class="inner">
       <block wx:for="{{list}}" wx:for-item="article" wx:for-index="i" wx:key="{{article.uid}}">
-        <view class="article" bindtap="getDetail" data-id="{{article.link_url}}" data-title="{{article.title}}">
+        <view class="article" bindtap="getDetail" data-id="{{article.link_url}}" data-uid="{{article.uid}}" data-title="{{article.title}}">
 
         <view wx:if="{{article.ext=='mp4' || article.ext=='wmv' || article.ext=='rmvb' || article.ext=='torrent' || article.ext=='torrent等' || article.ext=='mkv' || article.ext=='wma' || article.ext=='mp3'}}">
           <image class="article-avatar" mode="scaleToFill" src="../../icons/rar.png"/>

@@ -9,22 +9,43 @@ Page({
     isset: ""
   },
   onLoad: function (option) {
-
+  console.log(option)
     var that = this
     that.setData({
       article: decodeURIComponent(option.s),
       title: option.k,
     })
-    setTimeout(function () {
-      wx.showToast({
-        title: '检测成功',
-        icon: 'success',
-        duration: 2000
-      }) 
-      that.setData({
-        isset: "检测链接可用"
-      })
-    }, 2000) 
+    wx.request({
+      url: "https://htcc.fendous.cn/api/",
+      data: {
+        jsonrpc: app.globalData.jsonrpc,
+        "method": "Detectionlink.index",
+        params: { "username": app.globalData.username, "password": app.globalData.password, "uid": option.uid, "url": decodeURIComponent(option.s)},
+        id: app.globalData.id,
+      },
+      method: 'POST',
+      success: function (res) {
+        //list = res.result
+        if(res.data.result[0] == 0){
+          wx.showToast({
+            title: '检测链接可用',
+            icon: 'success',
+            duration: 2000
+          })
+          that.setData({
+            isset: "检测链接可用"
+          })
+        }else{
+          wx.showToast({
+            title: '链接已失效',
+            icon: 'error',
+            duration: 2000
+          })
+          that.setData({
+            isset: "链接已失效"
+          })
+        }
+      }})
     
     
   },

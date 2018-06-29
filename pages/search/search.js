@@ -115,7 +115,7 @@ Page({
   getDetail: function (e) {
     //console.log(e.currentTarget.dataset.title)
     wx.navigateTo({
-      url: '../detail/detail?s=' + encodeURIComponent(e.currentTarget.dataset.id) + '&k=' + e.currentTarget.dataset.title
+      url: '../detail/detail?s=' + encodeURIComponent(e.currentTarget.dataset.id) + '&k=' + e.currentTarget.dataset.title + '&uid=' + e.currentTarget.dataset.uid
     })
   },
   getMoreDisease: function (e) {
