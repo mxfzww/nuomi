@@ -36,12 +36,38 @@ Page({
       }
     })
   },
-  onShareAppMessage: function () {
+  onback:function(){
+    wx.navigateBack({
+       delta: 1
+    })
+  },
+  
+  onShareAppMessage: function (e) {
+    let that = this
     return {
       title: '网盘搜索',
       desc: '网盘数据建搜。',
-      path: '/pages/index/index'
+      path: '/pages/index/index',
+      success: function (res) {
+        wx.setClipboardData({
+          data: e.target.id,
+          success() {
+            wx.showToast({
+              title: '复制成功',
+              icon: 'success',
+              duration: 2000
+            })
+          }
+        })
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: "复制失败",
+          duration: 2000
+        });
+      }
     }
   }
+  
   
 })

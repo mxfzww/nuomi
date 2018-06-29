@@ -31,11 +31,11 @@ page {
   margin-left: 7%;
 }
 .btn{
-  width: 150px;
-  margin:20px 0;
+  width: 200px;
+  margin:20px auto;
   background: green;
   color: white;
-  margin-left: 30%;
+  margin-left: 25%;
   font-size: 15px;
   
 }
