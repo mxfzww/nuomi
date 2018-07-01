@@ -20,6 +20,11 @@
   <scroll-view scroll-y="true" style="height: 467px;" scroll-top="0">
 
     <view class="white-box hot">
+
+    <button class="cs_button" open-type="contact" session-from="weapp" style='width:100%;height:2rem;line-height:2rem;font-size:12px;background:#f7dee2;color:#f3637b'>
+              <image mode="scaleToFill" src="../../icons/lb.png" style="width:12px;height:12px;"/>
+如果没找到想要的信息,请关注这里不迷路哦<lable style="margin-left:1em;border:1px solid red;border-radius:3px;margin-left:25px;">马上关注</lable>
+</button> 
       <view class="title">
 
       <!--
@@ -28,13 +33,13 @@
 
         <text class="WText14PT middle-line">热门搜索</text>
       </view>
-   
       <view class="hot-words">
         <block wx:for="{{hotList}}" wx:for-item="hotItem" wx:for-index="i" wx:key="{{hotItem.id}}">
           <button  style='background:#337ab7;color:white' size="mini" type="default" bindtap="excuteHotSearch" class="hot-word" data-sub="{{i}}">{{hotItem.content}}</button>
         </block>
       </view>
     </view>
+
 <!--
     <view class="white-box recommend">
       <view class="title">

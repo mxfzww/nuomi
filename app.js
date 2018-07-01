@@ -9,6 +9,7 @@ App({
     console.log(msg)
   },
   getUserInfo: function (cb) {
+    //console.log(this.globalData.userInfo)
     var that = this
     if (this.globalData.userInfo) {
       typeof cb == "function" && cb(this.globalData.userInfo)
@@ -18,8 +19,11 @@ App({
         success: function (res) {
           var code = res.code;
           if (code) {
+
             wx.getUserInfo({
               success: function (res) {
+                //console.log(res)
+                //console.log(312321)
                 that.globalData.userInfo = res.userInfo
                 typeof cb == "function" && cb(that.globalData.userInfo)
                 var user = res.userInfo;
@@ -49,6 +53,9 @@ App({
                       }
                   }
                 })*/
+              },
+              fail: function (res) {
+                console.log(res)
               }
             })
           } else {

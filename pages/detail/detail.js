@@ -9,7 +9,7 @@ Page({
     isset: ""
   },
   onLoad: function (option) {
-  console.log(option)
+  //console.log(option)
     var that = this
     that.setData({
       article: decodeURIComponent(option.s),
@@ -35,7 +35,7 @@ Page({
           that.setData({
             isset: "检测链接可用"
           })
-        }else{
+        } else if(res.data.result[0] == 1){
           wx.showToast({
             title: '链接已失效',
             icon: 'error',
@@ -44,10 +44,17 @@ Page({
           that.setData({
             isset: "链接已失效"
           })
+        }else{
+          wx.showToast({
+            title: '链接状态不稳定',
+            icon: 'error',
+            duration: 2000
+          })
+          that.setData({
+            isset: "亲手去试试吧"
+          })
         }
       }})
-    
-    
   },
   show(e) {
     let that = this

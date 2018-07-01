@@ -362,6 +362,9 @@ Page({
       diseaseItem: this.data.diseaseItem
     })
   },
+  dataCode: function (data) {
+    return publicFun.dataCode(data)
+  },
   onShareAppMessage: function () {
     return {
       title: '网盘搜索',

@@ -61,9 +61,20 @@
         <image class="article-avatar" mode="scaleToFill" src="../../icons/q.png"/> 
                         </view>
 
-          <view class="article-info">
-            <text class="WText16PT article-title" style="font-size:14px;">{{article.title}}               </text>
-          </view>
+          <view class="article-info" style='display:block'>
+            <text class="WText16PT article-title" style="font-size:13px;">{{article.title}}\n </text>
+            <text class="WText16PT article-title" style="font-size:10px;margin-right:11px;">文件类型:{{article.ext}}</text>
+
+
+<label wx:if="{{article.webtype==1}}">
+            <text  style="font-size:11px;">来源信息:网页资源</text>
+</label>
+
+<label wx:else>
+<text class="" style="font-size:11px;">来源信息: 网盘资源</text>
+</label>
+
+   </view>
         </view>
       </block>
     </view>
